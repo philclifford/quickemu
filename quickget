@@ -636,7 +636,7 @@ EOF
         if [ "${OS}" == "macos" ]; then
             echo "macos_release=\"${RELEASE}\"" >> "${OS}-${RELEASE}.conf"
         fi
-        if [ "${OS}]" == "zorin"  ]; then 
+        if [ "${OS}" == "zorin"  ]; then 
             case  ${RELEASE} in
               15education64|15edulite64|15edulite32)
                 echo "disk_size=\"32G\"" >> "${OS}-${RELEASE}.conf";;
