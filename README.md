@@ -120,11 +120,23 @@ sudo apt install quickemu
 ## Other Linux
 
 ```bash
-git clone --depth=1 https://github.com/wimpysworld/quickemu
+git clone --depth=1 https://github.com/quickemu-project/quickemu
 cd quickemu
 ```
 
 Now install all the **Requirements** documented above.
+
+### Other sources
+
+[Repology.org](https://repology.org/) found the following releases have been packaged.
+
+#### Quickemu
+
+[![Packaging status](https://repology.org/badge/vertical-allrepos/quickemu.svg)](https://repology.org/project/quickemu/versions)
+
+#### Quickgui
+
+[![Packaging status](https://repology.org/badge/vertical-allrepos/quickgui.svg)](https://repology.org/project/quickgui/versions)
 
 # Usage
 
@@ -132,11 +144,11 @@ Now install all the **Requirements** documented above.
 
 While `quickemu` and `quickget` are designed for the terminal, a graphical user interface is also available:
 
-  * **[Quickgui](https://github.com/quickgui/quickgui)** by [Mark Johnson](https://github.com/marxjohnson) and [Yannick Mauray](https://github.com/ymauray).
+  * **[Quickgui](https://github.com/quickemu-project/quickgui)** by [Mark Johnson](https://github.com/marxjohnson) and [Yannick Mauray](https://github.com/ymauray).
 
 Many thanks to [Luke Wesley-Holley](https://github.com/Lukewh) and
 [Philipp Kiemle](https://github.com/daPhipz) for creating the
-**[Quickemu icons](https://github.com/Lukewh/quickemu-icons)** 🎨
+**[Quickemu icons](https://github.com/quickemu-project/quickemu-icons)** 🎨
 
 ### Quickgui for Ubuntu
 
@@ -226,6 +238,16 @@ disk_img="debian-bullseye/disk.qcow2"
 iso="debian-bullseye/firmware-11.0.0-amd64-DVD-1.iso"
 ```
 
+If you already have a collection of ISOs downloaded you can have `quickget` find and copy your existing file into the VM directory.
+
+```text
+--isodir                : base path beneath which to find local ISO copy
+                                       if a matching file is found it will be copied to the VM directory
+--localiso              : optional local ISO filename - defaults to target filename
+```
+
+`quickget` will then continue to `wget` or `zsync` using that file as a prior copy.  If the target file exists in the VM directory `quickget` will raise an error if you run it with `--isodir`
+
   * Use `quickemu` to start the virtual machine:
 
 ```bash
@@ -237,7 +259,7 @@ quickemu --vm debian-bullseye.conf
     * Install the SPICE agent (`spice-vdagent`) to enable copy/paste and USB redirection.
     * Install the SPICE WebDAV agent (`spice-webdavd`) to enable file sharing.
 
-## BSD Guests
+## BSD Guest Support
 
 `quickget` also supports:
 
@@ -413,6 +435,19 @@ SPICE ports the VM is connected to.
 ```bash
 cat ubuntu-focal/ubuntu-focal.ports
 ```
+# Accessibility
+
+Qemu provides support for using BrlAPI to display braille output on a real or fake device.
+
+
+```bash
+quickemu --vm ubuntu-impish.conf --accessibility braille --display sdl
+```
+or even
+
+```bash
+quickemu --vm ubuntu-impish.conf --acc brl --display sdl
+```
 
 # BIOS and EFI
 
@@ -551,6 +586,7 @@ Usage
   quickemu --vm ubuntu.conf
 
 You can also pass optional parameters
+  --accessible            : Select accessible facilitation. 'braille' (default - currently requires --display sdl )"
   --delete-disk           : Delete the disk image and EFI variables
   --delete-vm             : Delete the entire VM and it's configuration
   --display               : Select display backend. 'sdl' (default), 'gtk', 'none', or 'spice'
