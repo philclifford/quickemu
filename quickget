@@ -30,6 +30,7 @@ function pretty_name() {
   local PRETTY_NAME=""
   SIMPLE_NAME="${1}"
   case ${SIMPLE_NAME} in
+    accessible-coconut) PRETTY_NAME="Accessible Coconut";;
     alma)               PRETTY_NAME="Alma Linux";;
     alpine)             PRETTY_NAME="Alpine Linux";;
     android)            PRETTY_NAME="Android x86";;
@@ -57,9 +58,9 @@ function pretty_name() {
     regolith)           PRETTY_NAME="Regolith Linux";;
     rockylinux)         PRETTY_NAME="Rocky Linux";;
     ubuntu-budgie)      PRETTY_NAME="Ubuntu Budgie";;
-    ubuntukylin)       PRETTY_NAME="Ubuntu Kylin";;
+    ubuntukylin)        PRETTY_NAME="Ubuntu Kylin";;
     ubuntu-mate)        PRETTY_NAME="Ubuntu MATE";;
-    ubuntustudio)      PRETTY_NAME="Ubuntu Studio";;
+    ubuntustudio)       PRETTY_NAME="Ubuntu Studio";;
     void)               PRETTY_NAME="Void Linux";;
     zorin)              PRETTY_NAME="Zorin OS";;
     *)                  PRETTY_NAME="${SIMPLE_NAME^}";;
@@ -155,7 +156,8 @@ function list_csv() {
 }
 
 function os_support() {
-    echo alma \
+    echo accessible-coconut \
+    alma \
     alpine \
     android \
     archlinux \
@@ -202,6 +204,10 @@ function os_support() {
     windows \
     xubuntu \
     zorin
+}
+
+function releases_accessible-coconut() {
+    echo 20.04.05
 }
 
 function releases_alma() {
@@ -1090,6 +1096,18 @@ function get_manjaro() {
     HASH=$(wget -qO- "${MANIFESTURL}" | grep "Download_x64_Checksum =" | cut -d'"' -f2)
     echo "${URL} ${HASH}"
 }
+
+function get_accessible-coconut() {
+    local HASH=""
+    local ISO=""
+    local URL="https://sourceforge.net/projects/accessible-coconut/files/Accessible-Coconut-${RELEASE}"
+
+    ISO="Accessible-Coconut-${RELEASE}.iso"
+    HASH=$(wget -q -O- "${URL}" | grep net.sf.files|cut -d "," -f9|cut -d\" -f4)
+
+    echo "${URL}/${ISO} ${HASH}"
+}
+
 
 function get_mxlinux() {
     local EDITION="${1:-}"
