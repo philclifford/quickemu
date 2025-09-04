@@ -836,7 +836,7 @@ function releases_maboxlinux() {
 }
 
 function releases_macos() {
-    echo mojave catalina big-sur monterey ventura sonoma sequoia
+    echo lion mountainlion mavericks yosemite elcapitan sierra high-sierra mojave catalina big-sur monterey ventura sonoma sequoia
 }
 
 function releases_mageia() {
