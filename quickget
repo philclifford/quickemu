@@ -822,7 +822,7 @@ function releases_guix() {
 }
 
 function releases_haiku() {
-    echo r1beta5 r1beta4 r1beta3
+    echo r1beta6 r1beta5 r1beta4 r1beta3
 }
 
 function editions_haiku() {
@@ -2206,7 +2206,9 @@ function get_guix() {
 
 function get_haiku() {
     local ISO="haiku-${RELEASE}-${EDITION}-anyboot.iso"
-    local URL="http://mirror.rit.edu/haiku/${RELEASE}"
+#    local URL="http://mirror.rit.edu/haiku/${RELEASE}"
+    local URL="https://mirror.diyarciftci.xyz/haiku/haiku-release/${RELEASE}"
+    #local URL="https://mirrors.tnonline.net/haiku/haiku-release/${RELEASE}"
     HASH=$(web_pipe "${URL}/${ISO}.sha256" | grep "${ISO}" | cut -d' ' -f4)
     echo "${URL}/${ISO} ${HASH}"
 }
